@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shorten URL</title>
+     <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> 
+</head>
+<style>
+    .container-fluid{
+        height: 100vh;
+    }
+    .main{
+        height: 60vh;
+        width: 80vh;
+        align-self: center;
+    }
+    .copy{
+        height: 15vh;
+    }
+</style>
+<body>
+    <div class="container-fluid d-flex justify-content-center">
+        <div class=" main d-flex flex-column justify-content-around">
+            <div class="d-flex justify-content-center">
+                <h1>URL Shortner</h1>
+            </div>
+
+            <input type="text" id="link" class="text-center" placeholder="Enter the URL">
+            <button class="btn btn-success" onclick="sendLink()">Generate URL</button> 
+        
+            <div class=" lbl-div d-flex justify-content-around text-primary" >
+                <label class="lbl" id="lbl" style="display: none;">The URL has been shortened below</label>
+            </div>
+
+            <div class="copy d-flex justify-content-center">
+                <div class="d-flex flex-column justify-content-around">
+                    <input type="text" id="copy-lbl" class="copy-lbl text-center" disabled style="display: none;">
+                    <button id="copy-btn" onclick="copyText()" class="copy-btn btn btn-success" style="display: none;">Copy</button>  
+                </div>
+            </div>         
+        </div>
+    </div>
+    <script>
+        function sendLink(){
+            var link = document.getElementById('link').value;
+            document.getElementById('lbl').style.display = 'block'
+            var lbl = document.getElementById('copy-lbl')
+            lbl.style.display = 'block'
+            document.getElementById('copy-btn').style.display = 'block'
+
+            $.ajax({
+                type: "POST",
+                url: "/getlink",
+                data: {url:link},
+                dataType: "json",
+                success: function (response) {
+                    lbl.value = response.shortenedURL;
+                }
+            });
+        }
+        function copyText(){
+                var dummy = document.createElement('input'),
+                text = document.getElementById("copy-lbl").value;
+                document.body.appendChild(dummy);
+                dummy.value = text;
+                dummy.select();
+                document.execCommand('copy');
+                document.body.removeChild(dummy);
+                alert('Link copied!');
+        }
+    </script>
+</body>
+</html>
