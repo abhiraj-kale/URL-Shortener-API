@@ -3,7 +3,7 @@ const app = express()
 const PORT = process.env.PORT || 3000
 var bodyParser = require('body-parser');
 const path = require('path');
-var mysql = require('mysql');
+//var mysql = require('mysql');
 
 /*
 var con = mysql.createConnection({
