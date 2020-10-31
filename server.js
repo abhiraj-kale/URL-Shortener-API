@@ -7,10 +7,9 @@ var mysql = require('mysql');
 
 
 var con = mysql.createConnection({
-  host: "be33768d2bcc8f:3cb36c5b",
+  host: "us-cdbr-east-02.cleardb.com",
   user: "be33768d2bcc8f",
   password: "3cb36c5b"
-
 });
 
 con.connect(function(err) {
