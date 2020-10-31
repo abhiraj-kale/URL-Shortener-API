@@ -54,7 +54,7 @@ app.post('/getlink', (req, res)=>{
 
 app.get('/:id', function(req, res){
     var id = req.params.url;
-    var select = `SELECT url from urls WHERE id='${id}'`;
+    var select = `SELECT url from urls WHERE id=${id}`;
       con.query(select, function(err,result){
         if (err) throw err;
         if (result.length>0) {
