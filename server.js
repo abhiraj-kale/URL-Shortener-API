@@ -50,10 +50,10 @@ app.get('/:url', function(req, res){
     var select = `SELECT id from urls WHERE url='${url}'`;
       con.query(select, function(err,result){
         if (err) throw err;
-        if (result.length==0) {
-          res.end(`<h1>No such URL exists.</h1><a href="https://urlq.herokuapp.com/">Create one</a>`);
-        }else
+        if (result.length>0) {
           res.redirect("urlq.herokuapp.com/"+result[0].id);
+        }else
+        res.end(`<h1>No such URL exists.</h1><a href="https://urlq.herokuapp.com/">Create one</a>`);
       })
 })
 
