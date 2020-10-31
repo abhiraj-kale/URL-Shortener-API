@@ -3,13 +3,13 @@ const app = express()
 const PORT = process.env.PORT || 3000
 var bodyParser = require('body-parser');
 const path = require('path');
-//var mysql = require('mysql');
+var mysql = require('mysql');
 
-/*
+
 var con = mysql.createConnection({
-  host: "sql306.epizy.com",
-  user: "epiz_27061200",
-  password: "3klJ16efNqg"
+  host: "be33768d2bcc8f:3cb36c5b",
+  user: "be33768d2bcc8f",
+  password: "3cb36c5b"
 
 });
 
@@ -17,7 +17,7 @@ con.connect(function(err) {
   if (err) throw err;
   console.log("Connected to MySql!");
 });
-*/
+
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.set('view engine', 'ejs')
