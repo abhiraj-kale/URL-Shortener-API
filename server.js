@@ -10,7 +10,7 @@ var con = mysql.createConnection({
   host: "us-cdbr-east-02.cleardb.com",
   user: "be33768d2bcc8f",
   password: "3cb36c5b",
-  database: "mydb"
+  database: "heroku_5c062220028c37e"
 });
 
 con.connect(function(err) {
