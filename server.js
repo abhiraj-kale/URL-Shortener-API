@@ -51,7 +51,7 @@ app.get('/:url', function(req, res){
       con.query(select, function(err,result){
         if (err) throw err;
         if (result.length==0) {
-          res.end(`<h1>No such URL exists.</h1><a href="urlq.herokuapp.com/">Create one</a>`);
+          res.end(`<h1>No such URL exists.</h1><a href="https://urlq.herokuapp.com/">Create one</a>`);
         }else
           res.redirect("urlq.herokuapp.com/"+result[0].id);
       })
