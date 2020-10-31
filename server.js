@@ -9,7 +9,8 @@ var mysql = require('mysql');
 var con = mysql.createConnection({
   host: "us-cdbr-east-02.cleardb.com",
   user: "be33768d2bcc8f",
-  password: "3cb36c5b"
+  password: "3cb36c5b",
+  database: "mydb"
 });
 
 con.connect(function(err) {
@@ -32,7 +33,16 @@ app.get('/', (req, res)=>{
 })
 
 app.post('/getlink', (req, res)=>{
-    res.send({shortenedURL:req.body.url});
+    var url = req.body.url;
+    const query = `INSERT INTO urls(url) VALUES ('${url}')`;
+    mysql.query(sql, function (err, result) {
+      if (err) throw err;
+      var select = `SELECT id from urls WHERE url=${url}`;
+      mysql.query(select, function(err,result){
+        if (err) throw err;
+        res.send({shortenedURL:"urlq.herokuapp.com/"+result[0].id});
+      })
+    });
 })
 
 app.listen(PORT, ()=>{
