@@ -4,6 +4,7 @@ const PORT = process.env.PORT || 3000
 var bodyParser = require('body-parser');
 const path = require('path');
 var mysql = require('mysql');
+const { url } = require('inspector');
 
 
 var con = mysql.createConnection({
@@ -38,7 +39,7 @@ app.post('/getlink', (req, res)=>{
     con.query(s, function(req, r){
       if (r.length>0) {
         res.send({shortenedURL:"urlq.herokuapp.com/"+r[0].id});
-        return;
+        res.end;
       }      
     })
     const query = `INSERT INTO urls(url) VALUES ('${url}')`;
@@ -58,7 +59,10 @@ app.get('/:id', function(req, res){
       con.query(select, function(err,result){
         if (err) throw err;
         if (result.length>0) {
-          res.redirect(result[0].url);
+          res.writeHead(301,
+            {Location: result[0].url}
+          );
+          res.end();
         }else
         res.end(`<h1>No such URL exists.</h1><a href="https://urlq.herokuapp.com/">Create one</a>`);
       })
