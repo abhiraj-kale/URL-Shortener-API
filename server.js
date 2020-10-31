@@ -10,7 +10,6 @@ var con = mysql.createConnection({
   host: "us-cdbr-east-02.cleardb.com",
   user: "be33768d2bcc8f",
   password: "3cb36c5b",
-  port     : '3306',
   database: "mydb"
 });
 
