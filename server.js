@@ -10,6 +10,7 @@ var con = mysql.createConnection({
   host: "us-cdbr-east-02.cleardb.com",
   user: "be33768d2bcc8f",
   password: "3cb36c5b",
+  port     : '3306',
   database: "mydb"
 });
 
@@ -35,7 +36,7 @@ app.get('/', (req, res)=>{
 app.post('/getlink', (req, res)=>{
     var url = req.body.url;
     const query = `INSERT INTO urls(url) VALUES ('${url}')`;
-    mysql.query(sql, function (err, result) {
+    mysql.query(query, function (err, result) {
       if (err) throw err;
       var select = `SELECT id from urls WHERE url=${url}`;
       mysql.query(select, function(err,result){
