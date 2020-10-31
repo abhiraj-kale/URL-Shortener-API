@@ -35,13 +35,13 @@ app.get('/', (req, res)=>{
 
 app.post('/getlink', (req, res)=>{
     var url = req.body.url;
-    var s = `SELECT id from urls WHERE url='${url}'`;
+    var s = "SELECT id from urls WHERE url='"+url+"'";
     con.query(s, function(req, r){
       if (r.length>0) {
         res.send({shortenedURL:"urlq.herokuapp.com/"+r[0].id});
       }      
     })
-    const query = `INSERT INTO urls(url) VALUES ('${url}')`;
+    const query = "INSERT INTO urls(url) VALUES ('"+url+"')";
     con.query(query, function (err, result) {
       if (err) throw err;
       var select = "SELECT id from urls WHERE url='"+url+"'";
