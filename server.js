@@ -39,13 +39,12 @@ app.post('/getlink', (req, res)=>{
     con.query(s, function(req, r){
       if (r.length>0) {
         res.send({shortenedURL:"urlq.herokuapp.com/"+r[0].id});
-        res.end;
       }      
     })
     const query = `INSERT INTO urls(url) VALUES ('${url}')`;
     con.query(query, function (err, result) {
       if (err) throw err;
-      var select = `SELECT id from urls WHERE url='${url}'`;
+      var select = "SELECT id from urls WHERE url='"+url+"'";
       con.query(select, function(err,result){
         if (err) throw err;
         res.send({shortenedURL:"urlq.herokuapp.com/"+result[0].id});
@@ -55,14 +54,11 @@ app.post('/getlink', (req, res)=>{
 
 app.get('/:id', function(req, res){
     var id = req.params.id;
-    var select = `SELECT url from urls WHERE id=${id}`;
+    var select = "SELECT url from urls WHERE id="+id+"";
       con.query(select, function(err,result){
         if (err) throw err;
         if (result.length>0) {
-          res.writeHead(301,
-            {Location: result[0].url}
-          );
-          res.end();
+          res.redirect(result[0].url);
         }else
         res.end(`<h1>No such URL exists.</h1><a href="https://urlq.herokuapp.com/">Create one</a>`);
       })
