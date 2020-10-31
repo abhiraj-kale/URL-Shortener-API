@@ -45,6 +45,18 @@ app.post('/getlink', (req, res)=>{
     });
 })
 
+app.get('/:url', function(req, res){
+    var url = req.params.url;
+    var select = `SELECT id from urls WHERE url='${url}'`;
+      con.query(select, function(err,result){
+        if (err) throw err;
+        if (result.length==0) {
+          res.end(`<h1>No such URL exists.</h1><a href="urlq.herokuapp.com/">Create one</a>`);
+        }else
+          res.redirect("urlq.herokuapp.com/"+result[0].id);
+      })
+})
+
 app.listen(PORT, ()=>{
     console.log(`Listening on PORT @${PORT}`)
 })
