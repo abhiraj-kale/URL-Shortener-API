@@ -37,7 +37,7 @@ app.post('/getlink', (req, res)=>{
     const query = `INSERT INTO urls(url) VALUES ('${url}')`;
     con.query(query, function (err, result) {
       if (err) throw err;
-      var select = `SELECT id from urls WHERE url=${url}`;
+      var select = `SELECT id from urls WHERE url='${url}'`;
       con.query(select, function(err,result){
         if (err) throw err;
         res.send({shortenedURL:"urlq.herokuapp.com/"+result[0].id});
