@@ -34,6 +34,13 @@ app.get('/', (req, res)=>{
 
 app.post('/getlink', (req, res)=>{
     var url = req.body.url;
+    var s = `SELECT id from urls WHERE url='${url}'`;
+    con.query(s, function(req, r){
+      if (r.length>0) {
+        res.send({shortenedURL:"urlq.herokuapp.com/"+r[0].id});
+        return;
+      }      
+    })
     const query = `INSERT INTO urls(url) VALUES ('${url}')`;
     con.query(query, function (err, result) {
       if (err) throw err;
@@ -45,9 +52,9 @@ app.post('/getlink', (req, res)=>{
     });
 })
 
-app.get('/:url', function(req, res){
-    var url = req.params.url;
-    var select = `SELECT id from urls WHERE url='${url}'`;
+app.get('/:id', function(req, res){
+    var id = req.params.url;
+    var select = `SELECT url from urls WHERE id='${id}'`;
       con.query(select, function(err,result){
         if (err) throw err;
         if (result.length>0) {
