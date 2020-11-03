@@ -64,7 +64,7 @@ app.post('/getlink', (req, res)=>{
         res.send({shortenedURL:"urlq.herokuapp.com/"+result[0].id});
       })
     });
-    res.end;
+    //res.end;
 })
 
 app.get('/:id', function(req, res){

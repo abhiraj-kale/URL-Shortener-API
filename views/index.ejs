@@ -37,7 +37,7 @@
             </div>
 
             <input type="text" id="link" class="text-center" placeholder="Enter the URL">
-            <button class="btn btn-success" onclick="sendLink()">Generate URL</button> 
+            <button id='get-link-btn' class="btn btn-success" onclick="sendLink()">Generate URL</button> 
         
             <div class=" lbl-div d-flex justify-content-around text-primary" >
                 <label class="lbl" id="lbl" style="display: none;">The URL has been shortened below</label>
@@ -66,6 +66,7 @@
                 dataType: "json",
                 success: function (response) {
                     lbl.value = response.shortenedURL;
+                    document.getElementById("get-link-btn").disabled = true; 
                 }
             });
         }
