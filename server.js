@@ -1,10 +1,9 @@
 const express = require('express')
 const app = express()
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 3000 ;
 var bodyParser = require('body-parser');
 const path = require('path');
 var mysql = require('mysql');
-const { url } = require('inspector');
 
 var con = mysql.createConnection({
   host: "us-cdbr-east-02.cleardb.com",
