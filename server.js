@@ -6,14 +6,14 @@ const path = require('path');
 var mysql = require('mysql');
 const { url } = require('inspector');
 
-function handleDisconnect() { // Recreate the connection, since the old one cannot be reused.
-
 var con = mysql.createConnection({
   host: "us-cdbr-east-02.cleardb.com",
   user: "be33768d2bcc8f",
   password: "3cb36c5b",
   database: "heroku_5c062220028c37e"
 });
+
+function handleDisconnect() { // Recreate the connection, since the old one cannot be reused.
 
 con.connect(function(err) {              // The server is either down
     if(err) {                                     // or restarting (takes a while sometimes).
